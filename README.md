@@ -61,11 +61,4 @@ Follow the project: [X/Twitter @OlstFlow](https://x.com/@OlstFlow) *(if you'd li
 
 ---
 
-## 🧪 Coming Soon (Ideas)
-
-- Auto-sync on material change  
-- Node-type flexibility (Emission, Glossy, etc.)  
-- Mini UI panel in the Material tab
-
----
 
