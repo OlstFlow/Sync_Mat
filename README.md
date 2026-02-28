@@ -43,8 +43,15 @@ Accessible via **Right-Click** on the material in the **Material Properties pane
 
 ## 🧑‍💻 Requirements
 
-- Blender **4.3+**  
+- Blender **4.3+** (including **5.0+**)  
 - Works with **Principled BSDF** materials only
+
+---
+
+## ✅ Version Compatibility
+
+- Minimum supported Blender version: **4.3**
+- Compatible with Blender **4.3+** and **5.0+** (including newer 5.x builds)
 
 ---
 
