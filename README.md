@@ -35,16 +35,26 @@ Accessible via **Right-Click** on the material in the **Material Properties pane
 
 ## 🔧 Installation
 
+Download the latest add-on package from the Releases page:  
+https://github.com/OlstFlow/Sync_Mat/releases
+
 1. Download `sync_mat.zip` (or manually zip the `.py` file).  
-2. In Blender: `Edit > Preferences > Add-ons > Install`  
+2. Install by dragging the ZIP archive into the Blender viewport, or via `Edit > Preferences > Add-ons > Install`
 3. Enable **Sync Mat** from the list.
 
 ---
 
 ## 🧑‍💻 Requirements
 
-- Blender **4.3+**  
+- Blender **4.3+** (including **5.0+**)  
 - Works with **Principled BSDF** materials only
+
+---
+
+## ✅ Version Compatibility
+
+- Minimum supported Blender version: **4.3**
+- Compatible with Blender **4.3+** and **5.0+** (including newer 5.x builds)
 
 ---
 

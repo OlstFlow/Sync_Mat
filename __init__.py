@@ -17,9 +17,9 @@ import bpy
 bl_info = {
     "name": "Sync Mat",
     "author": "Olst, GPT",
-    "version": (1, 1, 4),
+    "version": (1, 2, 0),
     "blender": (4, 3, 0),
-    "location": "Material > Surface > Default Value (Context Menu)", # Updated location description
+    "location": "Material Properties > Surface > Base Color (Context Menu)",
     "description": "Sync Base Color and Alpha to Viewport Display color",
     "category": "Material",
 }
@@ -131,10 +131,43 @@ class MATERIAL_OT_sync_viewport_alpha(bpy.types.Operator):
                             material.diffuse_color[3] = alpha_value
                             break # Found Principled BSDF, move to next material slot
 
+def _is_target_base_color_context(context):
+    """Show menu items only on Principled BSDF Base Color in Material Properties."""
+    space = getattr(context, "space_data", None)
+    if not space or space.type != 'PROPERTIES':
+        return False
+
+    if getattr(space, "context", None) != 'MATERIAL':
+        return False
+
+    button_prop = getattr(context, "button_prop", None)
+    if not button_prop or button_prop.identifier != "default_value":
+        return False
+
+    socket = getattr(context, "button_pointer", None)
+    if not isinstance(socket, bpy.types.NodeSocketColor):
+        return False
+
+    if socket.is_output:
+        return False
+
+    node = getattr(socket, "node", None)
+    if not node or node.bl_idname != "ShaderNodeBsdfPrincipled":
+        return False
+
+    if len(node.inputs) == 0 or node.inputs[0] != socket:
+        return False
+
+    node_tree = getattr(socket, "id_data", None)
+    if not isinstance(node_tree, bpy.types.NodeTree) or node_tree.type != 'SHADER':
+        return False
+
+    return True
+
 def menu_func(self, context):
-    # Check if the context is appropriate (e.g., right-clicking on a color property)
-    # This basic check might need refinement depending on where exactly it should appear.
-    # For now, we assume it's called in the right context based on registration.
+    if not _is_target_base_color_context(context):
+        return
+
     layout = self.layout
     layout.separator()
     layout.operator(MATERIAL_OT_sync_viewport_display.bl_idname, text="Sync Base Color to Viewport Display")
